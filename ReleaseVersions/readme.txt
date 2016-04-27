@@ -1,0 +1,1 @@
+PCRAddFWRegistryConsole.exe 当前版本1.4. 是一键操作，仍然需要以管理员身份运行。自动筛选AS Region的FW，自动删除原有相关注册表。

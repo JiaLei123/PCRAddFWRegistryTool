@@ -1,0 +1,73 @@
+﻿<Window x:Class="PCRAddFWRegistryTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PCRAddFWRegistryTool"
+        Loaded="Window_Loaded"
+        Title="Please run as administrator!" Height="500" Width="800" Icon="FW.ico">
+    <!--Loaded="Window_Loaded" Unloaded="Window_Unloaded"-->
+    <Window.Resources>
+        <CollectionViewSource x:Key="cvs" Source="{Binding LstFWVMs}" Filter="CollectionViewSource_Filter">
+            
+        </CollectionViewSource>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+       
+        <TextBlock   Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="2">
+            <Hyperlink Name="hyperlink1"  ToolTip="Open by explorer" Command="{Binding OpenUpdateFolderCommand}">
+                <TextBlock Name="txtUpateFolder" Text="{Binding UpdateFolder, Mode=OneWay}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Text="Select the Region" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2"/>
+        <TextBlock Text="Delete all first" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="2"/>
+        <ListView Grid.Row="1" Grid.RowSpan="4" Margin="5" FontSize="20" Foreground="Blue"
+                                  ItemsSource="{Binding Source={StaticResource cvs}}"
+                                  >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="ToolTip" Value="{Binding FolderToolTip, Mode=OneWay}">
+                        
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        <ListView.View>
+                <GridView>
+                    <GridViewColumn  Header="Model"  DisplayMemberBinding="{Binding Path=Model , Mode=OneWay}" Width="180" />
+                    <GridViewColumn Header="Version"  DisplayMemberBinding="{Binding Path=Version , Mode=OneWay}" Width="180" />
+                    <GridViewColumn Header="Region"  DisplayMemberBinding="{Binding Path=Region , Mode=OneWay}" Width="80" />
+                    <!--<GridViewColumn Header="Path..." ToolTipService.ToolTip="tool"/>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="btnRefresh" Command="{Binding RefreshCommand}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                MinWidth="80" ToolTip="Refresh and show all packages under update folder">Refresh</Button>
+
+        <ComboBox Name="cboRegion"  Text="{Binding SelectedRegion}" Grid.Row="2" Grid.Column="2" 
+                  ToolTip="Must ensure all packages are the same region."
+                  HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="80" >
+            <ComboBox.Items>
+                <ComboBoxItem>A</ComboBoxItem>
+                <ComboBoxItem>E</ComboBoxItem>
+                <ComboBoxItem>L</ComboBoxItem>
+                <ComboBoxItem>N</ComboBoxItem>
+            </ComboBox.Items>
+        </ComboBox>
+        <!--Text="{Binding SelectedRegion}"-->
+        <!--SelectionChanged="cboRegion_SelectionChanged_1"-->
+        <CheckBox Name="chkDelete" IsChecked="{Binding DeleteAllFirst}" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  ></CheckBox>
+        <Button Name="btnCreate" Command="{Binding CreateCommand}"   Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                MinWidth="80">Create</Button>
+    </Grid>
+</Window>
