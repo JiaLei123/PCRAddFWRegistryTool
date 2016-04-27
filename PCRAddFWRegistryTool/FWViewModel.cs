@@ -38,7 +38,7 @@ namespace PCRAddFWRegistryTool
 
         #region Properties
 
-
+       //Package region
 
       private string region;
       public string Region
