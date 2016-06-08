@@ -405,16 +405,19 @@ namespace PCRAddFWRegistryTool
             this.GetVerFolders(this.UpdateFolder);
             foreach (string verFolder in this.lstVersionFolers)
             {
-                string pak32 = Directory.GetDirectories(verFolder)[0];
-                foreach (string pm in Directory.GetDirectories(pak32))
+                foreach(string pak32 in Directory.GetDirectories(verFolder))
                 {
-                    foreach (string modelFolder in Directory.GetDirectories(pm))
+                    foreach (string pm in Directory.GetDirectories(pak32))
                     {
-                        FWViewModel fwVM = new FWViewModel(pm, modelFolder);
+                        foreach (string modelFolder in Directory.GetDirectories(pm))
+                        {
+                            FWViewModel fwVM = new FWViewModel(pm, modelFolder);
 
-                        this.LstFWVMs.Add(fwVM);
+                            this.LstFWVMs.Add(fwVM);
+                        }
                     }
                 }
+                
             }
 
         }
