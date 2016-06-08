@@ -208,14 +208,10 @@ namespace PCRAddFWRegistryTool
                     return;
                 }
 
-
-               
-
                 if (this.DeleteAllFirst)
                 {
                     foreach (var v in packKey.GetSubKeyNames())
                     {
-                        
                         packKey.DeleteSubKey(v);
                     }
                 }
@@ -228,7 +224,6 @@ namespace PCRAddFWRegistryTool
                 foreach (string ver in lstVersions)
                 {
                     var lstp = this.FilteredLstFWVMs.Where(x => x.Version == ver && new DirectoryInfo(x.FolderName2PM).Name.Contains("portable"));//portable
-
                     var lstm = this.FilteredLstFWVMs.Where(x => x.Version == ver && new DirectoryInfo(x.FolderName2PM).Name.Contains("mobile"));
                     var lstre = this.FilteredLstFWVMs.Where(x => x.Version == ver && new DirectoryInfo(x.FolderName2PM).Name.Contains("repeater"));
 
@@ -237,9 +232,6 @@ namespace PCRAddFWRegistryTool
                     CreateOneVersion(lstre);
 
                 }
-                //foreach (string version in this.lstVersionFolders)
-                //    CreateOneVersion(version);
-
                 packKey.Close();
 
                 MessageBox.Show("Success!");
@@ -248,10 +240,6 @@ namespace PCRAddFWRegistryTool
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-
-
         }
 
 
@@ -415,8 +403,6 @@ namespace PCRAddFWRegistryTool
                 string pak32 = Directory.GetDirectories(verFolder)[0];
                 foreach (string pm in Directory.GetDirectories(pak32))
                 {
-
-
                     foreach (string modelFolder in Directory.GetDirectories(pm))
                     {
                         FWViewModel fwVM = new FWViewModel(pm, modelFolder);
