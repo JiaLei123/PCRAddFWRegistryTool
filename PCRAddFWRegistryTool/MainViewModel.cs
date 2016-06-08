@@ -183,8 +183,6 @@ namespace PCRAddFWRegistryTool
 
         public void Create()
         {
-
-
             try
             {
                 string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -287,7 +285,7 @@ namespace PCRAddFWRegistryTool
             string now = DateTime.Now.ToString("_yyyyMMddHHmmssfff");
             FWViewModel firstFWVM = lstFWVMs.First();
             //string strFWKey = new DirectoryInfo(versionFullPath).Name + now;
-            string strFWKey = firstFWVM.Version + now;
+            string strFWKey = Guid.NewGuid().ToString();
 
             RegistryKey fwKey = packKey.CreateSubKey(strFWKey, RegistryKeyPermissionCheck.ReadWriteSubTree);
 
@@ -299,12 +297,19 @@ namespace PCRAddFWRegistryTool
 
             //string Pakpd032 = Directory.GetDirectories(versionFullPath)[0];
 
-            int cnt = 0;
+            HashSet<string> pmFolders = new HashSet<string>();
             foreach (FWViewModel fwVMs in lstFWVMs)
             {
-                cnt++;
-                fwKey.SetValue(string.Format("Path{0}", cnt), fwVMs.FolderName2PM);
+                pmFolders.Add(fwVMs.FolderName2PM);
             }
+
+            int cnt = 0;
+            foreach (string pmFolder in pmFolders)
+            {
+                cnt++;
+                fwKey.SetValue(string.Format("Path{0}", cnt), pmFolder);
+            }
+
             //foreach (string pm in Directory.GetDirectories(Pakpd032))
             //{
             //    cnt++;
