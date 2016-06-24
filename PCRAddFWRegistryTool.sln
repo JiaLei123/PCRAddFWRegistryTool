@@ -38,6 +38,7 @@ Global
 		{32E09F89-80E5-4BD3-ACFF-EAE204B533D5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{32E09F89-80E5-4BD3-ACFF-EAE204B533D5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{32E09F89-80E5-4BD3-ACFF-EAE204B533D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{32E09F89-80E5-4BD3-ACFF-EAE204B533D5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

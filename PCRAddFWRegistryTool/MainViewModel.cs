@@ -396,7 +396,7 @@ namespace PCRAddFWRegistryTool
         }
 
         private Dictionary<string, string> dicVerModel = null;
-        private Regex regex = new Regex(@"^[A-Z]\d{6,8}_\d{6}$");
+        private Regex regex = new Regex(@"^[A-Z]\d{6,10}_\d{6}$");
         private void SearchAllFWs()
         {
             this.LstFWVMs = new ObservableCollection<FWViewModel>();
